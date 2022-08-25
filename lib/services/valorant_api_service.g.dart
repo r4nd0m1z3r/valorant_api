@@ -29,7 +29,12 @@ class _ValorantApiService implements ValorantApiService {
                 .compose(_dio.options, '/agents',
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = BaseModel<List<Agent>>.fromJson(_result.data!);
+    final value = BaseModel<List<Agent>>.fromJson(
+      _result.data!,
+      (json) => (json as List<dynamic>)
+          .map<Agent>((i) => Agent.fromJson(i as Map<String, dynamic>))
+          .toList(),
+    );
     return value;
   }
 
@@ -45,7 +50,12 @@ class _ValorantApiService implements ValorantApiService {
                 .compose(_dio.options, '/buddies',
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = BaseModel<List<Buddy>>.fromJson(_result.data!);
+    final value = BaseModel<List<Buddy>>.fromJson(
+      _result.data!,
+      (json) => (json as List<dynamic>)
+          .map<Buddy>((i) => Buddy.fromJson(i as Map<String, dynamic>))
+          .toList(),
+    );
     return value;
   }
 
@@ -61,7 +71,12 @@ class _ValorantApiService implements ValorantApiService {
                 .compose(_dio.options, '/playercards',
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = BaseModel<List<Card>>.fromJson(_result.data!);
+    final value = BaseModel<List<Card>>.fromJson(
+      _result.data!,
+      (json) => (json as List<dynamic>)
+          .map<Card>((i) => Card.fromJson(i as Map<String, dynamic>))
+          .toList(),
+    );
     return value;
   }
 
@@ -77,7 +92,13 @@ class _ValorantApiService implements ValorantApiService {
                 .compose(_dio.options, '/contenttiers',
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = BaseModel<List<ContentTier>>.fromJson(_result.data!);
+    final value = BaseModel<List<ContentTier>>.fromJson(
+      _result.data!,
+      (json) => (json as List<dynamic>)
+          .map<ContentTier>(
+              (i) => ContentTier.fromJson(i as Map<String, dynamic>))
+          .toList(),
+    );
     return value;
   }
 
@@ -93,7 +114,12 @@ class _ValorantApiService implements ValorantApiService {
                 .compose(_dio.options, '/currencies',
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = BaseModel<List<Currency>>.fromJson(_result.data!);
+    final value = BaseModel<List<Currency>>.fromJson(
+      _result.data!,
+      (json) => (json as List<dynamic>)
+          .map<Currency>((i) => Currency.fromJson(i as Map<String, dynamic>))
+          .toList(),
+    );
     return value;
   }
 
@@ -109,7 +135,12 @@ class _ValorantApiService implements ValorantApiService {
                 .compose(_dio.options, '/gamemodes',
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = BaseModel<List<Gamemode>>.fromJson(_result.data!);
+    final value = BaseModel<List<Gamemode>>.fromJson(
+      _result.data!,
+      (json) => (json as List<dynamic>)
+          .map<Gamemode>((i) => Gamemode.fromJson(i as Map<String, dynamic>))
+          .toList(),
+    );
     return value;
   }
 
@@ -125,7 +156,13 @@ class _ValorantApiService implements ValorantApiService {
                 .compose(_dio.options, '/gamemodes/equippables',
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = BaseModel<List<GamemodeEquippable>>.fromJson(_result.data!);
+    final value = BaseModel<List<GamemodeEquippable>>.fromJson(
+      _result.data!,
+      (json) => (json as List<dynamic>)
+          .map<GamemodeEquippable>(
+              (i) => GamemodeEquippable.fromJson(i as Map<String, dynamic>))
+          .toList(),
+    );
     return value;
   }
 
@@ -141,7 +178,13 @@ class _ValorantApiService implements ValorantApiService {
                 .compose(_dio.options, '/maps',
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = BaseModel<List<ValorantMap>>.fromJson(_result.data!);
+    final value = BaseModel<List<ValorantMap>>.fromJson(
+      _result.data!,
+      (json) => (json as List<dynamic>)
+          .map<ValorantMap>(
+              (i) => ValorantMap.fromJson(i as Map<String, dynamic>))
+          .toList(),
+    );
     return value;
   }
 
@@ -157,7 +200,12 @@ class _ValorantApiService implements ValorantApiService {
                 .compose(_dio.options, '/seasons',
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = BaseModel<List<Season>>.fromJson(_result.data!);
+    final value = BaseModel<List<Season>>.fromJson(
+      _result.data!,
+      (json) => (json as List<dynamic>)
+          .map<Season>((i) => Season.fromJson(i as Map<String, dynamic>))
+          .toList(),
+    );
     return value;
   }
 
@@ -173,7 +221,12 @@ class _ValorantApiService implements ValorantApiService {
                 .compose(_dio.options, '/themes',
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = BaseModel<List<Theme>>.fromJson(_result.data!);
+    final value = BaseModel<List<Theme>>.fromJson(
+      _result.data!,
+      (json) => (json as List<dynamic>)
+          .map<Theme>((i) => Theme.fromJson(i as Map<String, dynamic>))
+          .toList(),
+    );
     return value;
   }
 
@@ -189,7 +242,12 @@ class _ValorantApiService implements ValorantApiService {
                 .compose(_dio.options, '/playertitles',
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = BaseModel<List<Title>>.fromJson(_result.data!);
+    final value = BaseModel<List<Title>>.fromJson(
+      _result.data!,
+      (json) => (json as List<dynamic>)
+          .map<Title>((i) => Title.fromJson(i as Map<String, dynamic>))
+          .toList(),
+    );
     return value;
   }
 
@@ -205,7 +263,12 @@ class _ValorantApiService implements ValorantApiService {
                 .compose(_dio.options, '/weapons',
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = BaseModel<List<Weapon>>.fromJson(_result.data!);
+    final value = BaseModel<List<Weapon>>.fromJson(
+      _result.data!,
+      (json) => (json as List<dynamic>)
+          .map<Weapon>((i) => Weapon.fromJson(i as Map<String, dynamic>))
+          .toList(),
+    );
     return value;
   }
 
@@ -221,7 +284,10 @@ class _ValorantApiService implements ValorantApiService {
                 .compose(_dio.options, '/version',
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = BaseModel<Version>.fromJson(_result.data!);
+    final value = BaseModel<Version>.fromJson(
+      _result.data!,
+      (json) => Version.fromJson(json as Map<String, dynamic>),
+    );
     return value;
   }
 
@@ -237,7 +303,12 @@ class _ValorantApiService implements ValorantApiService {
                 .compose(_dio.options, '/sprays',
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = BaseModel<List<Spray>>.fromJson(_result.data!);
+    final value = BaseModel<List<Spray>>.fromJson(
+      _result.data!,
+      (json) => (json as List<dynamic>)
+          .map<Spray>((i) => Spray.fromJson(i as Map<String, dynamic>))
+          .toList(),
+    );
     return value;
   }
 
