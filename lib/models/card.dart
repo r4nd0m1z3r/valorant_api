@@ -1,10 +1,12 @@
-import 'package:json_annotation/json_annotation.dart';
+import 'package:isar/isar.dart';
+import 'card_json.dart';
 
 part 'card.g.dart';
 
-@JsonSerializable()
+@Collection()
 class Card {
-  const Card(
+  Card();
+  Card.fromFields(
       this.uuid,
       this.displayName,
       this.isHiddenIfNotOwned,
@@ -13,14 +15,17 @@ class Card {
       this.wideArt,
       this.largeArt,
       this.assetPath);
-  factory Card.fromJson(Map<String, dynamic> json) => _$CardFromJson(json);
+  factory Card.fromJson(Map<String, dynamic> json) => CardFromJson(json);
 
-  final String uuid;
-  final String displayName;
-  final bool isHiddenIfNotOwned;
-  final String displayIcon;
-  final String smallArt;
-  final String wideArt;
-  final String largeArt;
-  final String assetPath;
+  int id = Isar.autoIncrement;
+
+  @Index(name: 'uuid', type: IndexType.hash)
+  late final String uuid;
+  late final String displayName;
+  late final bool isHiddenIfNotOwned;
+  late final String displayIcon;
+  late final String smallArt;
+  late final String wideArt;
+  late final String largeArt;
+  late final String assetPath;
 }

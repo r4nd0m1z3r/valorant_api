@@ -1,33 +1,43 @@
-import 'package:json_annotation/json_annotation.dart';
+import 'package:isar/isar.dart';
+
+import 'season_json.dart';
 
 part 'season.g.dart';
 
-@JsonSerializable()
+@Collection()
 class Season {
-  const Season(this.uuid, this.displayName, this.type, this.startTime,
+  Season();
+  Season.fromFields(this.uuid, this.displayName, this.type, this.startTime,
       this.endTime, this.parentUuid, this.assetPath);
-  factory Season.fromJson(Map<String, dynamic> json) => _$SeasonFromJson(json);
+  factory Season.fromJson(Map<String, dynamic> json) => SeasonFromJson(json);
 
-  final String uuid;
-  final String displayName;
-  final String? type;
-  final DateTime startTime;
-  final DateTime endTime;
-  final String? parentUuid;
-  final String assetPath;
+  int id = Isar.autoIncrement;
+
+  @Index(name: 'uuid', type: IndexType.hash)
+  late final String uuid;
+  late final String displayName;
+  late final String? type;
+  late final DateTime startTime;
+  late final DateTime endTime;
+  late final String? parentUuid;
+  late final String assetPath;
 }
 
-@JsonSerializable()
+@Collection()
 class SeasonBorder {
-  const SeasonBorder(this.uuid, this.winsRequired, this.level, this.displayIcon,
-      this.smallIcon, this.assetPath);
+  SeasonBorder();
+  SeasonBorder.fromFields(this.uuid, this.winsRequired, this.level,
+      this.displayIcon, this.smallIcon, this.assetPath);
   factory SeasonBorder.fromJson(Map<String, dynamic> json) =>
-      _$SeasonBorderFromJson(json);
+      SeasonBorderFromJson(json);
 
-  final String uuid;
-  final int winsRequired;
-  final int level;
-  final String displayIcon;
-  final String smallIcon;
-  final String assetPath;
+  int id = Isar.autoIncrement;
+
+  @Index(name: 'uuid', type: IndexType.hash)
+  late final String uuid;
+  late final int winsRequired;
+  late final int level;
+  late final String displayIcon;
+  late final String smallIcon;
+  late final String assetPath;
 }

@@ -1,17 +1,22 @@
-import 'package:json_annotation/json_annotation.dart';
+import 'package:isar/isar.dart';
+import 'content_tiers_json.dart';
 
 part 'content_tiers.g.dart';
 
-@JsonSerializable()
+@Collection()
 class ContentTier {
-  const ContentTier(this.uuid, this.devName, this.highlightColor,
+  ContentTier();
+  ContentTier.fromFields(this.uuid, this.devName, this.highlightColor,
       this.displayIcon, this.assetPath);
   factory ContentTier.fromJson(Map<String, dynamic> json) =>
-      _$ContentTierFromJson(json);
+      ContentTierFromJson(json);
 
-  final String uuid;
-  final String devName;
-  final String highlightColor;
-  final String displayIcon;
-  final String assetPath;
+  int id = Isar.autoIncrement;
+
+  @Index(name: 'uuid', type: IndexType.hash)
+  late final String uuid;
+  late final String devName;
+  late final String highlightColor;
+  late final String displayIcon;
+  late final String assetPath;
 }

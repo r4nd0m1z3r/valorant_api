@@ -1,10 +1,13 @@
-import 'package:json_annotation/json_annotation.dart';
+import 'package:isar/isar.dart';
+
+import 'weapon_json.dart';
 
 part 'weapon.g.dart';
 
-@JsonSerializable()
+@Collection()
 class Weapon {
-  const Weapon(
+  Weapon();
+  Weapon.fromFields(
       this.uuid,
       this.displayName,
       this.category,
@@ -14,22 +17,26 @@ class Weapon {
       this.weaponStats,
       this.shopData,
       this.skins);
-  factory Weapon.fromJson(Map<String, dynamic> json) => _$WeaponFromJson(json);
+  factory Weapon.fromJson(Map<String, dynamic> json) => WeaponFromJson(json);
 
-  final String uuid;
-  final String displayName;
-  final String category;
-  final String defaultSkinUuid;
-  final String killStreamIcon;
-  final String assetPath;
-  final WeaponStats? weaponStats;
-  final WeaponShopData? shopData;
-  final List<WeaponSkin> skins;
+  int id = Isar.autoIncrement;
+
+  @Index(name: 'uuid', type: IndexType.hash)
+  late final String uuid;
+  late final String displayName;
+  late final String category;
+  late final String defaultSkinUuid;
+  late final String killStreamIcon;
+  late final String assetPath;
+  late final WeaponStats? weaponStats;
+  late final WeaponShopData? shopData;
+  late final List<WeaponSkin> skins;
 }
 
-@JsonSerializable()
+@Collection()
 class WeaponStats {
-  const WeaponStats(
+  WeaponStats();
+  WeaponStats.fromFields(
       this.fireRate,
       this.magazineSize,
       this.runSpeedMultiplier,
@@ -46,48 +53,57 @@ class WeaponStats {
       this.airBurstStats,
       this.damageRanges);
   factory WeaponStats.fromJson(Map<String, dynamic> json) =>
-      _$WeaponStatsFromJson(json);
+      WeaponStatsFromJson(json);
 
-  final double fireRate;
-  final int magazineSize;
-  final double runSpeedMultiplier;
-  final double equipTimeSeconds;
-  final double reloadTimeSeconds;
-  final double firstBulletAccuracy;
-  final int shotgunPelletCount;
-  final String wallPenetration;
-  final String? feature;
-  final String? fireMode;
-  final String? altFireType;
-  final WeaponAdsStats? adsStats;
-  final WeaponShotgunStats? altShotgunStats;
-  final WeaponBurstStats? airBurstStats;
-  final List<WeaponDamageRange> damageRanges;
+  int id = Isar.autoIncrement;
+
+  late final double fireRate;
+  late final int magazineSize;
+  late final double runSpeedMultiplier;
+  late final double equipTimeSeconds;
+  late final double reloadTimeSeconds;
+  late final double firstBulletAccuracy;
+  late final int shotgunPelletCount;
+  late final String wallPenetration;
+  late final String? feature;
+  late final String? fireMode;
+  late final String? altFireType;
+  late final WeaponAdsStats? adsStats;
+  late final WeaponShotgunStats? altShotgunStats;
+  late final WeaponBurstStats? airBurstStats;
+  late final List<WeaponDamageRange> damageRanges;
 }
 
-@JsonSerializable()
+@Collection()
 class WeaponShotgunStats {
-  const WeaponShotgunStats(this.shotgunPelletCount, this.burstRate);
+  WeaponShotgunStats();
+  WeaponShotgunStats.fromFields(this.shotgunPelletCount, this.burstRate);
   factory WeaponShotgunStats.fromJson(Map<String, dynamic> json) =>
-      _$WeaponShotgunStatsFromJson(json);
+      WeaponShotgunStatsFromJson(json);
 
-  final int shotgunPelletCount;
-  final double burstRate;
+  int id = Isar.autoIncrement;
+
+  late final int shotgunPelletCount;
+  late final double burstRate;
 }
 
-@JsonSerializable()
+@Collection()
 class WeaponBurstStats {
-  const WeaponBurstStats(this.shotgunPelletCount, this.burstDistance);
+  WeaponBurstStats();
+  WeaponBurstStats.fromFields(this.shotgunPelletCount, this.burstDistance);
   factory WeaponBurstStats.fromJson(Map<String, dynamic> json) =>
-      _$WeaponBurstStatsFromJson(json);
+      WeaponBurstStatsFromJson(json);
 
-  final int shotgunPelletCount;
-  final double burstDistance;
+  int id = Isar.autoIncrement;
+
+  late final int shotgunPelletCount;
+  late final double burstDistance;
 }
 
-@JsonSerializable()
+@Collection()
 class WeaponShopData {
-  const WeaponShopData(
+  WeaponShopData();
+  WeaponShopData.fromFields(
       this.cost,
       this.category,
       this.categoryText,
@@ -97,59 +113,71 @@ class WeaponShopData {
       this.newImage2,
       this.assetPath);
   factory WeaponShopData.fromJson(Map<String, dynamic> json) =>
-      _$WeaponShopDataFromJson(json);
+      WeaponShopDataFromJson(json);
 
-  final int cost;
-  final String category;
-  final String categoryText;
-  final WeaponShopGridPosition? gridPosition;
-  final String? image;
-  final String newImage;
-  final String? newImage2;
-  final String assetPath;
+  int id = Isar.autoIncrement;
+
+  late final int cost;
+  late final String category;
+  late final String categoryText;
+  late final WeaponShopGridPosition? gridPosition;
+  late final String? image;
+  late final String newImage;
+  late final String? newImage2;
+  late final String assetPath;
 }
 
-@JsonSerializable()
+@Collection()
 class WeaponDamageRange {
-  const WeaponDamageRange(this.rangeStartMeters, this.rangeEndMeters,
+  WeaponDamageRange();
+  WeaponDamageRange.fromFields(this.rangeStartMeters, this.rangeEndMeters,
       this.headDamage, this.bodyDamage, this.legDamage);
   factory WeaponDamageRange.fromJson(Map<String, dynamic> json) =>
-      _$WeaponDamageRangeFromJson(json);
+      WeaponDamageRangeFromJson(json);
 
-  final double rangeStartMeters;
-  final double rangeEndMeters;
-  final double headDamage;
-  final double bodyDamage;
-  final double legDamage;
+  int id = Isar.autoIncrement;
+
+  late final double rangeStartMeters;
+  late final double rangeEndMeters;
+  late final double headDamage;
+  late final double bodyDamage;
+  late final double legDamage;
 }
 
-@JsonSerializable()
+@Collection()
 class WeaponAdsStats {
-  const WeaponAdsStats(this.zoomMultiplier, this.fireRate,
+  WeaponAdsStats();
+  WeaponAdsStats.fromFields(this.zoomMultiplier, this.fireRate,
       this.runSpeedMultiplier, this.burstCount, this.firstBulletAccuracy);
   factory WeaponAdsStats.fromJson(Map<String, dynamic> json) =>
-      _$WeaponAdsStatsFromJson(json);
+      WeaponAdsStatsFromJson(json);
 
-  final double zoomMultiplier;
-  final double fireRate;
-  final double runSpeedMultiplier;
-  final int burstCount;
-  final double firstBulletAccuracy;
+  int id = Isar.autoIncrement;
+
+  late final double zoomMultiplier;
+  late final double fireRate;
+  late final double runSpeedMultiplier;
+  late final int burstCount;
+  late final double firstBulletAccuracy;
 }
 
-@JsonSerializable()
+@Collection()
 class WeaponShopGridPosition {
-  const WeaponShopGridPosition(this.row, this.column);
+  WeaponShopGridPosition();
+  WeaponShopGridPosition.fromFields(this.row, this.column);
   factory WeaponShopGridPosition.fromJson(Map<String, dynamic> json) =>
-      _$WeaponShopGridPositionFromJson(json);
+      WeaponShopGridPositionFromJson(json);
 
-  final int row;
-  final int column;
+  int id = Isar.autoIncrement;
+
+  late final int row;
+  late final int column;
 }
 
-@JsonSerializable()
+@Collection()
 class WeaponSkin {
-  const WeaponSkin(
+  WeaponSkin();
+  WeaponSkin.fromFields(
       this.uuid,
       this.displayName,
       this.themeUuid,
@@ -160,45 +188,56 @@ class WeaponSkin {
       this.chromas,
       this.levels);
   factory WeaponSkin.fromJson(Map<String, dynamic> json) =>
-      _$WeaponSkinFromJson(json);
+      WeaponSkinFromJson(json);
 
-  final String uuid;
-  final String displayName;
-  final String themeUuid;
-  final String? contentTierUuid;
-  final String? displayIcon;
-  final String? wallpaper;
-  final String assetPath;
-  final List<WeaponSkinChroma> chromas;
-  final List<WeaponSkinLevel> levels;
+  int id = Isar.autoIncrement;
+
+  @Index(name: 'uuid', type: IndexType.hash)
+  late final String uuid;
+  late final String displayName;
+  late final String themeUuid;
+  late final String? contentTierUuid;
+  late final String? displayIcon;
+  late final String? wallpaper;
+  late final String assetPath;
+  late final List<WeaponSkinChroma> chromas;
+  late final List<WeaponSkinLevel> levels;
 }
 
-@JsonSerializable()
+@Collection()
 class WeaponSkinChroma {
-  const WeaponSkinChroma(this.uuid, this.displayName, this.displayIcon,
+  WeaponSkinChroma();
+  WeaponSkinChroma.fromFields(this.uuid, this.displayName, this.displayIcon,
       this.fullRender, this.swatch, this.streamedVideo, this.assetPath);
   factory WeaponSkinChroma.fromJson(Map<String, dynamic> json) =>
-      _$WeaponSkinChromaFromJson(json);
+      WeaponSkinChromaFromJson(json);
 
-  final String uuid;
-  final String displayName;
-  final String? displayIcon;
-  final String fullRender;
-  final Object? swatch;
-  final String? streamedVideo;
-  final String assetPath;
+  int id = Isar.autoIncrement;
+
+  @Index(name: 'uuid', type: IndexType.hash)
+  late final String uuid;
+  late final String displayName;
+  late final String? displayIcon;
+  late final String fullRender;
+  late final Object? swatch;
+  late final String? streamedVideo;
+  late final String assetPath;
 }
 
-@JsonSerializable()
+@Collection()
 class WeaponSkinLevel {
-  const WeaponSkinLevel(this.uuid, this.displayName, this.levelItem,
+  WeaponSkinLevel();
+  WeaponSkinLevel.fromFields(this.uuid, this.displayName, this.levelItem,
       this.displayIcon, this.assetPath);
   factory WeaponSkinLevel.fromJson(Map<String, dynamic> json) =>
-      _$WeaponSkinLevelFromJson(json);
+      WeaponSkinLevelFromJson(json);
 
-  final String uuid;
-  final String? displayName;
-  final Object? levelItem;
-  final String? displayIcon;
-  final String assetPath;
+  int id = Isar.autoIncrement;
+
+  @Index(name: 'uuid', type: IndexType.hash)
+  late final String uuid;
+  late final String? displayName;
+  late final Object? levelItem;
+  late final String? displayIcon;
+  late final String assetPath;
 }

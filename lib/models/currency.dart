@@ -1,18 +1,23 @@
-import 'package:json_annotation/json_annotation.dart';
+import 'package:isar/isar.dart';
+import 'currency_json.dart';
 
 part 'currency.g.dart';
 
-@JsonSerializable()
+@Collection()
 class Currency {
-  const Currency(this.uuid, this.displayName, this.displayNameSingular,
+  Currency();
+  Currency.fromFields(this.uuid, this.displayName, this.displayNameSingular,
       this.displayIcon, this.largeIcon, this.assetPath);
   factory Currency.fromJson(Map<String, dynamic> json) =>
-      _$CurrencyFromJson(json);
+      CurrencyFromJson(json);
 
-  final String uuid;
-  final String displayName;
-  final String displayNameSingular;
-  final String displayIcon;
-  final String? largeIcon;
-  final String assetPath;
+  int id = Isar.autoIncrement;
+
+  @Index(name: 'uuid', type: IndexType.hash)
+  late final String uuid;
+  late final String displayName;
+  late final String displayNameSingular;
+  late final String displayIcon;
+  late final String? largeIcon;
+  late final String assetPath;
 }

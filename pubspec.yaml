@@ -10,9 +10,12 @@ dependencies:
   retrofit: ^3.0.1+1
   dio: ^4.0.6
   json_annotation: ^4.6.0
+  isar:
 
 dev_dependencies:
   retrofit_generator: '>=4.0.0 <5.0.0'
   build_runner:
   json_serializable: '>4.4.0'
+  isar_generator:
   test: ^1.21.4
+ 

@@ -1,10 +1,12 @@
-import 'package:json_annotation/json_annotation.dart';
+import 'package:isar/isar.dart';
+import 'spray_json.dart';
 
 part 'spray.g.dart';
 
-@JsonSerializable()
+@Collection()
 class Spray {
-  const Spray(
+  Spray();
+  Spray.fromFields(
       this.uuid,
       this.displayName,
       this.category,
@@ -16,31 +18,38 @@ class Spray {
       this.animationGif,
       this.assetPath,
       this.sprayLevels);
-  factory Spray.fromJson(Map<String, dynamic> json) => _$SprayFromJson(json);
+  factory Spray.fromJson(Map<String, dynamic> json) => SprayFromJson(json);
 
-  final String uuid;
-  final String displayName;
-  final String? category;
-  final String? themeUuid;
-  final String displayIcon;
-  final String? fullIcon;
-  final String? fullTransparentIcon;
-  final String? animationPng;
-  final String? animationGif;
-  final String assetPath;
-  final List<SprayLevel>? sprayLevels;
+  int id = Isar.autoIncrement;
+
+  @Index(name: 'uuid', type: IndexType.hash)
+  late final String uuid;
+  late final String displayName;
+  late final String? category;
+  late final String? themeUuid;
+  late final String displayIcon;
+  late final String? fullIcon;
+  late final String? fullTransparentIcon;
+  late final String? animationPng;
+  late final String? animationGif;
+  late final String assetPath;
+  late final List<SprayLevel>? sprayLevels;
 }
 
-@JsonSerializable()
+@Collection()
 class SprayLevel {
-  const SprayLevel(this.uuid, this.sprayLevel, this.displayName,
+  SprayLevel();
+  SprayLevel.fromFields(this.uuid, this.sprayLevel, this.displayName,
       this.displayIcon, this.assetPath);
   factory SprayLevel.fromJson(Map<String, dynamic> json) =>
-      _$SprayLevelFromJson(json);
+      SprayLevelFromJson(json);
 
-  final String uuid;
-  final int sprayLevel;
-  final String displayName;
-  final String displayIcon;
-  final String assetPath;
+  int id = Isar.autoIncrement;
+
+  @Index(name: 'uuid', type: IndexType.hash)
+  late final String uuid;
+  late final int sprayLevel;
+  late final String displayName;
+  late final String displayIcon;
+  late final String assetPath;
 }

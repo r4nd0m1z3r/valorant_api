@@ -1,10 +1,13 @@
-import 'package:json_annotation/json_annotation.dart';
+import 'package:isar/isar.dart';
+
+import 'map_json.dart';
 
 part 'map.g.dart';
 
-@JsonSerializable()
+@Collection()
 class ValorantMap {
-  const ValorantMap(
+  ValorantMap();
+  ValorantMap.fromFields(
       this.uuid,
       this.displayName,
       this.coordinates,
@@ -17,17 +20,20 @@ class ValorantMap {
       this.xScalarToAdd,
       this.yScalarToAdd);
   factory ValorantMap.fromJson(Map<String, dynamic> json) =>
-      _$ValorantMapFromJson(json);
+      ValorantMapFromJson(json);
 
-  final String uuid;
-  final String displayName;
-  final String coordinates;
-  final String? displayIcon;
-  final String? listViewIcon;
-  final String splash;
-  final String mapUrl;
-  final double xMultiplier;
-  final double yMultiplier;
-  final double xScalarToAdd;
-  final double yScalarToAdd;
+  int id = Isar.autoIncrement;
+
+  @Index(name: 'uuid', type: IndexType.hash)
+  late final String uuid;
+  late final String displayName;
+  late final String coordinates;
+  late final String? displayIcon;
+  late final String? listViewIcon;
+  late final String splash;
+  late final String mapUrl;
+  late final double xMultiplier;
+  late final double yMultiplier;
+  late final double xScalarToAdd;
+  late final double yScalarToAdd;
 }

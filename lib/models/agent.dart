@@ -1,10 +1,12 @@
-import 'package:json_annotation/json_annotation.dart';
+import 'package:isar/isar.dart';
+import 'agent_json.dart';
 
 part 'agent.g.dart';
 
-@JsonSerializable()
+@Collection()
 class Agent {
-  const Agent(
+  Agent();
+  Agent.fromFields(
       this.uuid,
       this.displayName,
       this.description,
@@ -19,47 +21,57 @@ class Agent {
       this.isAvailableForTest,
       this.role,
       this.abilities);
-  factory Agent.fromJson(Map<String, dynamic> json) => _$AgentFromJson(json);
+  factory Agent.fromJson(Map<String, dynamic> json) => AgentFromJson(json);
 
-  final String uuid;
-  final String displayName;
-  final String description;
-  final String developerName;
-  final List<String>? characterTags;
-  final String displayIcon;
-  final String? bustPortrait;
-  final String? fullPortrait;
-  final String assetPath;
-  final bool isFullPortraitRightFacing;
-  final bool isPlayableCharacter;
-  final bool isAvailableForTest;
-  final AgentRole? role;
-  final List<AgentAbility> abilities;
+  int id = Isar.autoIncrement;
+
+  @Index(name: 'uuid', type: IndexType.hash)
+  late final String uuid;
+  late final String displayName;
+  late final String description;
+  late final String developerName;
+  late final List<String>? characterTags;
+  late final String displayIcon;
+  late final String? bustPortrait;
+  late final String? fullPortrait;
+  late final String assetPath;
+  late final bool isFullPortraitRightFacing;
+  late final bool isPlayableCharacter;
+  late final bool isAvailableForTest;
+  late final AgentRole? role;
+  late final List<AgentAbility> abilities;
 }
 
-@JsonSerializable()
+@Collection()
 class AgentAbility {
-  const AgentAbility(
+  AgentAbility();
+  AgentAbility.fromFields(
       this.slot, this.displayName, this.description, this.displayIcon);
   factory AgentAbility.fromJson(Map<String, dynamic> json) =>
-      _$AgentAbilityFromJson(json);
+      AgentAbilityFromJson(json);
 
-  final String slot;
-  final String? displayName;
-  final String? description;
-  final String? displayIcon;
+  int id = Isar.autoIncrement;
+
+  late final String slot;
+  late final String? displayName;
+  late final String? description;
+  late final String? displayIcon;
 }
 
-@JsonSerializable()
+@Collection()
 class AgentRole {
-  const AgentRole(this.uuid, this.displayName, this.description,
+  AgentRole();
+  AgentRole.fromFields(this.uuid, this.displayName, this.description,
       this.displayIcon, this.assetPath);
   factory AgentRole.fromJson(Map<String, dynamic> json) =>
-      _$AgentRoleFromJson(json);
+      AgentRoleFromJson(json);
 
-  final String uuid;
-  final String displayName;
-  final String description;
-  final String displayIcon;
-  final String assetPath;
+  int id = Isar.autoIncrement;
+
+  @Index(name: 'uuid', type: IndexType.hash)
+  late final String uuid;
+  late final String displayName;
+  late final String description;
+  late final String displayIcon;
+  late final String assetPath;
 }

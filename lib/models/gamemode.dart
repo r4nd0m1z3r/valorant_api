@@ -1,10 +1,13 @@
-import 'package:json_annotation/json_annotation.dart';
+import 'package:isar/isar.dart';
+
+import 'gamemode_json.dart';
 
 part 'gamemode.g.dart';
 
-@JsonSerializable()
+@Collection()
 class Gamemode {
-  const Gamemode(
+  Gamemode();
+  Gamemode.fromFields(
       this.uuid,
       this.displayName,
       this.duration,
@@ -16,41 +19,51 @@ class Gamemode {
       this.displayIcon,
       this.assetPath);
   factory Gamemode.fromJson(Map<String, dynamic> json) =>
-      _$GamemodeFromJson(json);
+      GamemodeFromJson(json);
 
-  final String uuid;
-  final String displayName;
-  final String? duration;
-  final bool isTeamVoiceAllowed;
-  final bool isMinimapHidden;
-  final int orbCount;
-  final List<String>? teamRoles;
-  final List<OverridenGameFeature>? gameFeatureOverrides;
-  final String? displayIcon;
-  final String assetPath;
+  int id = Isar.autoIncrement;
+
+  @Index(name: 'uuid', type: IndexType.hash)
+  late final String uuid;
+  late final String displayName;
+  late final String? duration;
+  late final bool isTeamVoiceAllowed;
+  late final bool isMinimapHidden;
+  late final int orbCount;
+  late final List<String>? teamRoles;
+  late final List<OverridenGameFeature>? gameFeatureOverrides;
+  late final String? displayIcon;
+  late final String assetPath;
 }
 
-@JsonSerializable()
+@Collection()
 class OverridenGameFeature {
-  const OverridenGameFeature(this.featureName, this.state);
+  OverridenGameFeature();
+  OverridenGameFeature.fromFields(this.featureName, this.state);
   factory OverridenGameFeature.fromJson(Map<String, dynamic> json) =>
-      _$OverridenGameFeatureFromJson(json);
+      OverridenGameFeatureFromJson(json);
 
-  final String featureName;
-  final bool state;
+  int id = Isar.autoIncrement;
+
+  late final String featureName;
+  late final bool state;
 }
 
-@JsonSerializable()
+@Collection()
 class GamemodeEquippable {
-  const GamemodeEquippable(this.uuid, this.displayName, this.category,
+  GamemodeEquippable();
+  GamemodeEquippable.fromFields(this.uuid, this.displayName, this.category,
       this.displayIcon, this.killStreamIcon, this.assetPath);
   factory GamemodeEquippable.fromJson(Map<String, dynamic> json) =>
-      _$GamemodeEquippableFromJson(json);
+      GamemodeEquippableFromJson(json);
 
-  final String uuid;
-  final String displayName;
-  final String category;
-  final String displayIcon;
-  final String killStreamIcon;
-  final String assetPath;
+  int id = Isar.autoIncrement;
+
+  @Index(name: 'uuid', type: IndexType.hash)
+  late final String uuid;
+  late final String displayName;
+  late final String category;
+  late final String displayIcon;
+  late final String killStreamIcon;
+  late final String assetPath;
 }

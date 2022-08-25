@@ -1,17 +1,22 @@
-import 'package:json_annotation/json_annotation.dart';
+import 'package:isar/isar.dart';
+import 'buddy_json.dart';
 
 part 'buddy.g.dart';
 
-@JsonSerializable()
+@Collection()
 class Buddy {
-  const Buddy(this.uuid, this.displayName, this.themeUuid, this.displayIcon,
-      this.assetPath, this.isHiddenIfNotOwned);
-  factory Buddy.fromJson(Map<String, dynamic> json) => _$BuddyFromJson(json);
+  Buddy();
+  Buddy.fromFields(this.uuid, this.displayName, this.themeUuid,
+      this.displayIcon, this.assetPath, this.isHiddenIfNotOwned);
+  factory Buddy.fromJson(Map<String, dynamic> json) => BuddyFromJson(json);
 
-  final String uuid;
-  final String displayName;
-  final String? themeUuid;
-  final String displayIcon;
-  final String assetPath;
-  final bool isHiddenIfNotOwned;
+  int id = Isar.autoIncrement;
+
+  @Index(name: 'uuid', type: IndexType.hash)
+  late final String uuid;
+  late final String displayName;
+  late final String? themeUuid;
+  late final String displayIcon;
+  late final String assetPath;
+  late final bool isHiddenIfNotOwned;
 }

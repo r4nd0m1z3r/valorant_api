@@ -1,16 +1,21 @@
-import 'package:json_annotation/json_annotation.dart';
+import 'package:isar/isar.dart';
+import 'theme_json.dart';
 
 part 'theme.g.dart';
 
-@JsonSerializable()
+@Collection()
 class Theme {
-  const Theme(this.uuid, this.displayName, this.displayIcon,
+  Theme();
+  Theme.fromFields(this.uuid, this.displayName, this.displayIcon,
       this.storeFeaturedImage, this.assetPath);
-  factory Theme.fromJson(Map<String, dynamic> json) => _$ThemeFromJson(json);
+  factory Theme.fromJson(Map<String, dynamic> json) => ThemeFromJson(json);
 
-  final String uuid;
-  final String displayName;
-  final String? displayIcon;
-  final String? storeFeaturedImage;
-  final String assetPath;
+  int id = Isar.autoIncrement;
+
+  @Index(name: 'uuid', type: IndexType.hash)
+  late final String uuid;
+  late final String displayName;
+  late final String? displayIcon;
+  late final String? storeFeaturedImage;
+  late final String assetPath;
 }

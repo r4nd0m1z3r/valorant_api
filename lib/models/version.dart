@@ -1,15 +1,20 @@
-import 'package:json_annotation/json_annotation.dart';
+import 'package:isar/isar.dart';
+
+import 'version_json.dart';
 
 part 'version.g.dart';
 
-@JsonSerializable()
+@Collection()
 class Version {
-  const Version(this.branch, this.version, this.buildVersion, this.buildDate);
-  factory Version.fromJson(Map<String, dynamic> json) =>
-      _$VersionFromJson(json);
+  Version();
+  Version.fromFields(
+      this.branch, this.version, this.buildVersion, this.buildDate);
+  factory Version.fromJson(Map<String, dynamic> json) => VersionFromJson(json);
 
-  final String branch;
-  final String version;
-  final String buildVersion;
-  final DateTime buildDate;
+  int id = Isar.autoIncrement;
+
+  late final String branch;
+  late final String version;
+  late final String buildVersion;
+  late final DateTime buildDate;
 }
